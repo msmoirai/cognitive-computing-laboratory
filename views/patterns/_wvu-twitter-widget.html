@@ -1,0 +1,48 @@
+<div class="wvu-twitter-widget <r:page:data name="bgcolor_twitter" /> background">
+  <div class="wvu-twitter-widget__container">
+
+    <r:page:if_has_content_for region="wvu-twitter-widget__header" always_show_in_edit_mode="true">
+      <div class="wvu-twitter-widget__header">
+        <r:editable_region name="wvu-twitter-widget__header">
+          <h2>Follow Us on Twitter</h2>
+          <p>Subhead goes here.</p>
+        </r:editable_region>
+      </div>
+    </r:page:if_has_content_for>
+
+    <div id="exampleProfile"></div>
+
+    <div class="wvu-twitter-widget__postscript">
+      <a href="http://twitter.com/<r:site:data name="twitter_handle" />">
+        <img src="https://static.wvu.edu/global/images/icons/social/circle-twitter--2.0.0.svg" alt="Twitter icon" />
+        @<r:site:data name="twitter_handle" />
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<r:partial name="patterns/instructions/wvu-twitter-widget" theme="Code" />
+
+<r:content_for name="page_js">
+  <r:include_javascript name="vendor/twitterFetcher" />
+
+  <script type="text/javascript" defer>
+    // ##### Simple example 1 #####
+    // A simple example to get my latest tweet and write to a HTML element with
+    // id "example1". Also automatically hyperlinks URLS and user mentions and
+    // hashtags.
+    var configProfile = {
+      "profile": {"screenName": '<r:site:data name="twitter_handle" />'},
+      "domId": 'exampleProfile',
+      "maxTweets": 5,
+      "enableLinks": true,
+      "showUser": false,
+      "showTime": true,
+      "showImages": false,
+      "showInteraction": false,
+      "lang": 'en'
+    };
+    twitterFetcher.fetch(configProfile);
+  </script>
+</r:content_for>

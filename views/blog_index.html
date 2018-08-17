@@ -1,0 +1,132 @@
+---
+layout: default
+custom_data_attributes:
+- agenda_id
+- alternate_url
+- backpage_has_sidebar
+- backpage_header
+- backpage_header_badge
+- backpage_main
+- bgcolor_adverts
+- bgcolor_backpage
+- bgcolor_calendar_widget
+- bgcolor_diptych
+- bgcolor_diptych_2
+- bgcolor_diptych_3
+- bgcolor_featurettes
+- bgcolor_featurettes_2
+- bgcolor_gallery
+- bgcolor_lede_text
+- bgcolor_media_object
+- bgcolor_pentaptych
+- bgcolor_pentaptych_2
+- bgcolor_pentaptych_3
+- bgcolor_polyptych
+- bgcolor_profiles
+- bgcolor_profiles_index
+- bgcolor_quadriptych
+- bgcolor_quadriptych_2
+- bgcolor_quadriptych_3
+- bgcolor_quicklinks
+- bgcolor_social_media
+- bgcolor_super_nav
+- bgcolor_testimonials
+- bgcolor_triptych
+- bgcolor_triptych_2
+- bgcolor_triptych_3
+- bgcolor_twitter
+- bgcolor_video
+- calendar_url_page
+- directory_id
+- featurettes_id
+- featurettes_2_id
+- hero_has_video
+- hero_text_alignment
+- hero_vignetting
+- jquery_defer_page
+- link_text
+- polyptych_items
+- profile_quote
+- profile_quote_author
+- profiles_id
+- search_action
+- search_index_id
+- show_instructions
+- slot_01
+- slot_02
+- slot_03
+- slot_04
+- slot_05
+- slot_06
+- slot_07
+- slot_07
+- slot_08
+- slot_09
+- slot_10
+- staff_directory_id
+- testimonials_id
+- thumbnail_alt
+- thumbnail_url
+- thumbnail_url_sq
+---
+
+<r:partial name="patterns/wvu-backpage-partials--top" />
+
+<div class="wvu-container">
+
+  <r:comment><!-- NOTE: Set how many blog posts you'd like to show per page. Eg: default="10" --></r:comment>
+  <r:set_var name="limit" value="{$limit}" default="10"/>
+
+  <div class="main">
+
+    <r:blog:articles limit="{$limit}" page="{$page}" tags="{$tags}" tags_op="{$tags_op}" year="{$year}" month="{$month}" day="{$day}">
+      <r:set_var name="article_count" value="{count}" />
+
+      <r:if_no_articles>
+        <p>No blog posts found. Try again later, perhaps?</p>
+      </r:if_no_articles>
+
+      <r:comment><!-- NOTE: Blog articles use Schema.org's tags to structure your data & help with SEO: http://goo.gl/SKs4Qb --></r:comment>
+
+      <r:if_articles>
+        <div class="wvu-articles">
+          <r:each>
+            <article class="wvu-article" itemscope="" itemtype="http://schema.org/BlogPosting">
+              <h2 class="wvu-article__title" itemprop="headline"><a href="<r:article:path />"><r:article:name /></a></h2>
+              <p class="wvu-article__meta">
+                <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                  <span class="wvu-article__author" itemprop="name">
+                    <r:article:author_full_name /> |
+                  </span> <!-- /.wvu-article__author -->
+                </span> <!-- /itemprop="author" -->
+                <time class="wvu-article__date" itemprop="datePublished" datetime="<r:date_format format="iso8601" value="{article:published_at}" />"><r:date_format format="%A, %B %d, %Y" value="{article:published_at}" /></time>
+              </p> <!-- /.wvu-article__meta -->
+              <div class="wvu-article__body" itemprop="articleBody">
+                <r:select_html css_selector="p" limit="2">
+                  <r:article:content name="article-body" />
+                </r:select_html>
+              </div> <!-- /.wvu-article__body -->
+              <p class="wvu-article__read-full-article"><a href="<r:article:path />">Read Full Article<span class="u-wvu-visually-hidden">: <r:article:name /></span></a></p>
+            </article> <!-- /.wvu-article -->
+          </r:each>
+        </div> <!-- /.wvu-articles -->
+      </r:if_articles>
+
+      <r:pagination>
+        <ul class="wvu-pagination">
+          <li class="wvu-pagination__older <r:if_last_page>wvu-pagination__disabled</r:if_last_page>"><a href="<r:next_url />" rel="next">&larr; Older Articles</a></li>
+          <li class="wvu-pagination__newer <r:if_first_page>wvu-pagination__disabled</r:if_first_page>"><a href="<r:previous_url />" rel="prev">Newer Articles &rarr;</a></li>
+        </ul>
+      </r:pagination>
+    </r:blog:articles>
+  </div> <!-- /.main -->
+
+  <div class="wvu-sidebar">
+    <div class="wvu-sub-nav">
+      <h3>Archives</h3>
+      <r:blog:archive:monthly ul_class="wvu-blog-archive" count_class="wvu-blog-archive__count" />
+    </div> <!-- /.wvu-sub-nav -->
+    <a href="<r:page:url format="rss" />">Articles RSS Feed</a>
+  </div> <!-- /.wvu-sidebar -->
+
+</div> <!-- /.wvu-container -->

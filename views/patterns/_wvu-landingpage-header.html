@@ -1,0 +1,35 @@
+<r:set_var name="bgurl">
+  <r:page:slug />-header-background
+</r:set_var>
+
+<div class="wvu-landingpage-header wvu-landingpage-header--<r:site:id />" style="<r:files:each labels="backpage-background" limit="1" types="image" random="true">background-image: url(<r:file:image_url size="1780x580" />);</r:files:each> <r:files:each labels="{$bgurl}" limit="1" types="image" random="true">background-image: url(<r:file:image_url size="1780x580" />);</r:files:each>">
+
+  <div class="wvu-landingpage-header__container">
+    <div class="wvu-landingpage-header__labels">
+      <r:if expr="{{ NOT(BLANK(backpage_header_badge)) }}">
+        <div class="wvu-landingpage-header__badge">
+          <r:page:data name="backpage_header_badge" />
+        </div>
+      </r:if>
+      <h1><span><r:page:first_non_blank_attr names="alternate_name, name" /></span></h1>
+      <r:page:if_has_content_for region="wvu-landingpage-header__introduction" always_show_in_edit_mode="true">
+        <p><span><r:editable_region name="wvu-landingpage-header__introduction" type="simple" /></span></p>
+      </r:page:if_has_content_for>
+    </div>
+    <div class="wvu-landingpage-header__subnav">
+      <r:if_children>
+        <div class="wvu-landingpage-header__subnav-button-container">
+          <button>In this section</button>
+          <ul>
+            <r:children:each>
+              <li><a href="<r:page:url />"><r:page:first_non_blank_attr names="alternate_name, name" /></a></li>
+            </r:children:each>
+          </ul>
+        </div>
+      </r:if_children>
+    </div>
+  </div>
+
+</div>
+
+<r:partial name="patterns/instructions/wvu-landingpage-header" theme="Code" />

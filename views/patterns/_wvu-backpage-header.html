@@ -1,0 +1,21 @@
+<r:set_var name="bgurl">
+  <r:page:slug />-header-background
+</r:set_var>
+
+<div class="wvu-backpage-header wvu-backpage-header--<r:site:id />" style="<r:files:each labels="backpage-background" limit="1" types="image" random="true">background-image: url(<r:file:image_url size="1780x580" />);<r:set_var name="bgalt"><r:file:alt_text /></r:set_var></r:files:each> <r:files:each labels="{$bgurl}" limit="1" types="image" random="true">background-image: url(<r:file:image_url size="1780x580" />);<r:set_var name="bgalt"><r:file:alt_text /></r:set_var></r:files:each>">
+  <p class="u-wvu-visually-hidden">Background Image for Header: <r:var name="bgalt" /></p>
+  <r:partial name="patterns/wvu-breadcrumbs" />
+  <div class="wvu-backpage-header__container">
+    <r:if expr="{{ NOT(BLANK(backpage_header_badge)) }}">
+      <div class="wvu-backpage-header__badge">
+        <r:page:data name="backpage_header_badge" />
+      </div>
+    </r:if>
+    <h1><span><r:page:first_non_blank_attr names="alternate_name, name" /></span></h1>
+    <r:page:if_has_content_for region="wvu-profile__job-title">
+      <p><r:page:content name="wvu-profile__job-title" /></p>
+    </r:page:if_has_content_for>
+  </div>
+</div>
+
+<r:partial name="patterns/instructions/wvu-backpage-header" theme="Code" />

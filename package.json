@@ -1,0 +1,19 @@
+{
+  "name": "ur-super-theme-v2",
+  "version": "1.0.0",
+  "description": "WVU Super Theme v2",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/wvudigital/ur-super-theme-v2"
+  },
+  "author": "May Day <may.day@mail.wvu.edu>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^4.0.1"
+  }
+}
